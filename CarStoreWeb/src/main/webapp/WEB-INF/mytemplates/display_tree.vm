@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>main layout</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">		
+		<link href="/OxygenWeb/public/reference_node_oauth/css/all.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/animate.min.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/js/bootstrap-modal-master/css/bootstrap-modal.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/js/bootstrap-modal-master/css/all.css" rel="stylesheet">
+	</head>
+	<body class="bg-info page-background">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img class="herder-icon" alt="Brand" src="/OxygenWeb/public/reference_node_oauth/img/icon-header.png">
+					</a>
+				</div>
+				<div class="navbar-header pull-right ">
+					<span id="logoutTitleIcon" class="navbar-brand">
+						Logout
+					</span>
+				</div>
+				<div class="navbar-header pull-right">
+					<span id="loginTitleIcon" class="navbar-brand">
+						Login
+					</span>
+				</div>
+			</div>
+		</nav>
+		<nav class="navbar">
+				<div class="navbar-header">
+					<a id="goToDeatilNodePage" href="/OxygenWeb/treeNode" class="navbar-brand btn btn-primary">
+						Detail Page
+					</a>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<table class="table table-bordered">
+				<tbody id="displayTree">
+				</tbody>
+			</table>
+		</div>
+			
+		<div id="loginModel" class="modal fade">
+		  <div class="modal-header">
+		  </div>
+		  <div class="modal-body">
+		    <div class="row-fluid">
+		      <div class="span6">
+		        <h4>User Name</h4>
+		        <p><input id="userName" type="text"  class="form-control"></p>
+		      </div>
+		      <div class="span6">
+		        <h4>Password</h4>
+		        <p><input id="password" type="text"  class="form-control"></p>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="modal-footer">
+		    <button type="button" data-dismiss="modal" class="btn">Close</button>
+		    <button id="loginButton" type="button" class="btn btn-primary">Login</button>
+		  </div>
+		</div>
+	</body>	
+    <script src="/OxygenWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/js/bootstrap.min.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/js/bootstrap-modal-master/js/bootstrap-modalmanager.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/js/bootstrap-modal-master/js/bootstrap-modal.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/js/jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/EconnyNamespace.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/node.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/tree.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/tree/display_tree.js"></script>
+</html>

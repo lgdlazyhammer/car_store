@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>main layout</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">		
+		<link href="/OxygenWeb/public/reference_node_oauth/css/all.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/animate.min.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/OxygenWeb/public/reference_node_oauth/css/bootstrap-theme.min.css" rel="stylesheet">
+	</head>
+	<body class="bg-info page-background">
+		<input value="$!nodeId" class="hidden" id="nodeId"/>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img class="herder-icon" alt="Brand" src="/OxygenWeb/public/reference_node_oauth/img/icon-header.png">
+					</a>
+				</div>
+				<div class="navbar-header pull-right ">
+					<a class="navbar-brand" href="#">
+						Logout
+					</a>
+				</div>
+				<div class="navbar-header pull-right">
+					<a class="navbar-brand" href="#">
+						Login
+					</a>
+				</div>
+			</div>
+		</nav>
+		<nav class="navbar">
+				<div class="navbar-header">
+					<span class="navbar-brand btn btn-primary" id="addNode">
+						Add Node
+					</span>
+				</div>
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img class="herder-icon" alt="Brand" src="/OxygenWeb/public/reference_node_oauth/img/icon-header.png">
+					</a>
+				</div>
+				<div class="navbar-header">
+					<a id="goToDeatilNodePage" href="/OxygenWeb/treeNode" class="navbar-brand btn btn-primary">
+						Detail Page
+					</a>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<table>
+				<tbody id="displayTree">
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<div>
+			<table class="table">
+				<tbody>
+					<tr><td>标题:</td><td><input id="nodeTitleInput" type="text" readonly="readonly"/></td></tr>
+					<tr><td>描述信息:</td><td><textarea rows="3" cols="22" id="nodeDescriptionInput" readonly="readonly"></textarea></td><td id="updateNodeButton" class="btn btn-primary" disabled="disabled">更新</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<div>
+			<table class="table">
+				<tbody id="nodeDocsTable">
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<div>
+			<table class="table">
+				<tbody id="nodePicsTable">
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<div>
+			<table class="table">
+				<tbody>
+					<tr><td>节点文档:</td><td><input id="fileNodeDoc" class="hidden" type="file" name="file_data" multiple></td><td><label class="btn btn-primary" for="fileNodeDoc">选择文件</label></td></tr>
+					<tr><td><span id="fileNodeDocLabel"></span></td></tr>
+					<tr><td id="saveNodeDocButton" class="btn btn-primary" disabled="disabled">增加文档</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<br/>
+		<div>
+			<table class="table">
+				<tbody>
+					<tr><td>节点图片:</td><td><input id="fileNodePic" class="btn btn-primary" type="file" name="file_data" multiple></td></tr>
+					<tr><td id="saveNodePicButton" class="btn btn-primary" disabled="disabled">增加图片</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</body>	
+    <script src="/OxygenWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/OxygenWeb/public/js/ajaxfileupload.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/js/bootstrap.min.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/EconnyNamespace.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/node.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/econny-work-tree/js/tree.js"></script>
+    <script src="/OxygenWeb/public/reference_node_oauth/tree/tree_node.js"></script>
+</html>

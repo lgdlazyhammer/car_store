@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.econny.webapp.CarStoreDao.mybatis.dao.UserRoleMapper">
+
+	<resultMap type="com.econny.webapp.CarStoreEntity.UserRoleEntity"
+		id="userRoleHashEntity">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="del_flag" column="delFlag" />
+	</resultMap>
+	
+	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.UserRoleEntity">
+		INSERT INTO user_role (
+		id,
+		name,
+		description,
+		del_flag
+		) values(
+		#{id},
+		#{name},
+		#{description},
+		#{delFlag}
+		)
+	</insert>
+	
+	<insert id="saveBatch" parameterType="com.econny.webapp.CarStoreEntity.UserRoleEntity" flushCache="true"
+		statementType="PREPARED" keyProperty="" keyColumn="" timeout="20">
+		INSERT INTO user_role (
+		id,
+		name,
+		description,
+		del_flag
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.id}, #{item.name}, #{item.description}, #{item.delFlag})
+		</foreach>
+	</insert>
+
+	<delete id="delete" parameterType="com.econny.webapp.CarStoreEntity.UserRoleEntity">
+		DELETE FROM user_role
+		where
+		id =
+		#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.econny.webapp.CarStoreEntity.UserRoleEntity">
+		UPDATE user_role
+		set 
+		name = #{name},
+		description = #{description}
+		WHERE		
+		id = #{id}
+	</update>
+
+	<select id="findList" parameterType="com.econny.webapp.CarStoreEntity.UserRoleEntity" resultMap="userRoleHashEntity">
+		SELECT * FROM user_role
+		WHERE
+			del_flag = 0
+			<if test="id != null and id !=''">
+				AND id = #{id}
+			</if>
+	</select>
+
+</mapper>

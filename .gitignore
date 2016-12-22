@@ -1,0 +1,11 @@
+/.metadata
+/.recommenders
+/Servers
+/RemoteSystemsTempFiles
+/CarStoreAction/target
+/CarStoreDao/target
+/CarStoreEntity/target
+/CarStoreService/target
+/CarStoreWeb/target
+/CarStoreWeb/src/main/webapp/WEB-INF/upload/file/save
+/CarStoreWeb/src/main/webapp/WEB-INF/resources/img

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.econny.webapp.CarStoreDao.mybatis.dao.ServiceCarPriceMapper">
+
+	<resultMap type="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity"
+		id="serviceCarPriceHashEntity">
+		<result property="id" column="id" />
+		<result property="service_id" column="serviceId" />
+		<result property="car_type_id" column="carTypeId" />
+		<result property="price" column="price" />
+		<result property="del_flag" column="delFlag" />
+	</resultMap>
+	
+	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity">
+		INSERT INTO service_car_price (
+		id,
+		service_id,
+		car_type_id,
+		price,
+		del_flag
+		) values(
+		#{id},
+		#{serviceId},
+		#{carTypeId},
+		#{price},
+		#{delFlag}
+		)
+	</insert>
+	
+	<insert id="saveBatch" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity" flushCache="true"
+		statementType="PREPARED" keyProperty="" keyColumn="" timeout="20">
+		INSERT INTO service_car_price (
+		id,
+		service_id,
+		car_type_id,
+		price,
+		del_flag
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.id}, #{item.service_id}, #{item.car_type_id}, #{item.price}, #{item.delFlag})
+		</foreach>
+	</insert>
+
+	<delete id="delete" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity">
+		DELETE FROM service_car_price
+		where
+		id =
+		#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity">
+		UPDATE service_car_price
+		set 
+		service_id = #{serviceId},
+		car_type_id = #{carTypeId},
+		price = #{price}
+		WHERE		
+		id = #{id}
+	</update>
+
+	<select id="findList" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity" resultMap="serviceCarPriceHashEntity">
+		SELECT * FROM service_car_price
+		WHERE
+			del_flag = 0
+			<if test="id != null and id !=''">
+				AND id = #{id}
+			</if>
+			<if test="serviceId != null and serviceId !=''">
+				AND service_id = #{serviceId}
+			</if>
+			<if test="carTypeId != null and carTypeId !=''">
+				AND car_type_id = #{carTypeId}
+			</if>
+	</select>
+
+</mapper>

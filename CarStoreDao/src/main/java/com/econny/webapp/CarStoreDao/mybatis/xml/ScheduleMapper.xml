@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.econny.webapp.CarStoreDao.mybatis.dao.ScheduleMapper">
+
+	<resultMap type="com.econny.webapp.CarStoreEntity.ScheduleEntity"
+		id="scheduleHashEntity">
+		<result property="id" column="id" />
+		<result property="user_id" column="userId" />
+		<result property="service_id" column="serviceId" />
+		<result property="car_id" column="carId" />
+		<result property="price" column="price" />
+		<result property="time_start" column="timeStart" />
+		<result property="time_end" column="timeEnd" />
+		<result property="description" column="description" />
+		<result property="del_flag" column="delFlag" />
+	</resultMap>
+	
+	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity">
+		INSERT INTO schedule (
+		id,
+		user_id,
+		service_id,
+		car_id,
+		price,
+		time_start,
+		time_end,
+		description,
+		del_flag
+		) values(
+		#{id},
+		#{userId},
+		#{serviceId},
+		#{carId},
+		#{price},
+		#{timeStart},
+		#{timeEnd},
+		#{description},
+		#{delFlag}
+		)
+	</insert>
+	
+	<insert id="saveBatch" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" flushCache="true"
+		statementType="PREPARED" keyProperty="" keyColumn="" timeout="20">
+		INSERT INTO schedule (
+		id,
+		user_id,
+		service_id,
+		car_id,
+		price,
+		time_start,
+		time_end,
+		description,
+		del_flag
+		) values
+		<foreach item="item" collection="list" separator=",">
+			(#{item.id},#{item.userId},#{item.serviceId},#{item.carId},#{item.price},#{item.timeStart},#{item.timeEnd},#{item.description},#{item.delFlag})
+		</foreach>
+	</insert>
+
+	<delete id="delete" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity">
+		DELETE FROM schedule
+		where
+		id =
+		#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity">
+		UPDATE schedule
+		set 
+		user_id = #{userId},
+		service_id = #{serviceId},
+		car_id = #{carId},
+		price = #{price},
+		time_start = #{timeStart},
+		time_end = #{timeEnd},
+		description = #{description}
+		WHERE		
+		id = #{id}
+	</update>
+
+	<select id="findList" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" resultMap="scheduleHashEntity">
+		SELECT * FROM schedule
+		WHERE
+			del_flag = 0
+			<if test="id != null and id !=''">
+				AND id = #{id}
+			</if>
+			<if test="userId != null and userId !=''">
+				AND user_id = #{userId}
+			</if>
+			<if test="serviceId != null and serviceId !=''">
+				AND service_id = #{serviceId}
+			</if>
+			<if test="carId != null and carId !=''">
+				AND car_id = #{carId}
+			</if>
+			<if test="searchDate != null and searchDate !=''">
+				AND time_start &lt;= #{searchDate}
+			</if>
+			<if test="searchDate != null and searchDate !=''">
+				AND time_end &gt;= #{searchDate}
+			</if>
+	</select>
+
+</mapper>
