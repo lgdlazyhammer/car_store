@@ -9,7 +9,7 @@
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="description" column="description" />
-		<result property="del_flag" column="delFlag" />
+		<result property="delFlag" column="del_flag" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.ServiceEntity">

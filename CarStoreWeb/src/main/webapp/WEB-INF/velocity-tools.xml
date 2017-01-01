@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+	<tool>
+		<key>newstool</key>
+		<class>com.tonyplan.web.velocity.NewsTool</class>
+	</tool>
+</toolbox>

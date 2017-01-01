@@ -164,4 +164,26 @@ public class CommonMethod {
 
 		return 0;
 	}
+	
+	public static Integer[] makeTimeLine(Integer startHour, Integer endHour){
+		
+		Integer[] timeLine = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		
+		Integer count = endHour - startHour;
+		for(int i=0;i<count;i++){
+			timeLine[startHour+i]++;
+		}
+		return timeLine;
+	}
+	
+	public static Integer[][] makeTimeTable(Integer[] timeLine, Integer[][] timeTable){
+		
+		for(int i=0;i<timeLine.length;i++){
+			if(timeLine[i]==1){
+				timeTable[i/6][i%6]++;
+			}
+		}
+		
+		return timeTable;
+	}
 }

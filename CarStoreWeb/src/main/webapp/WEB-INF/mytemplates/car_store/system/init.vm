@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>车店管理系统初始化</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
+		<link href="/CarStoreWeb/public/car_store/css/all.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/css/animate.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/js/bootstrap-modal-master/css/bootstrap-modal.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/js/bootstrap-modal-master/css/all.css" rel="stylesheet">
+	</head>
+	<body class="bg-info page-background">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
+					</a>
+				</div>
+				<div id="logoutTitle" class="navbar-header pull-right ">
+					<span class="navbar-brand">
+						Logout
+					</span>
+				</div>
+				<div id="loginTitle" class="navbar-header pull-right">
+					<a href="/CarStoreWeb/user/login" class="navbar-brand">
+						Login
+					</a>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<ol class="breadcrumb">
+				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
+			</ol>
+		</div>
+				
+		<div class="container">
+			<h2>系统初始化</h2>
+			<div>
+				<input id="fileAjaxUpload" class="hidden" type="file" name="myfile">
+				<label for="fileAjaxUpload" class="btn btn-primary">选择文件</label>
+    			<button id="submitAjaxFile" class="btn btn-primary">提交</button>
+    			<label id="fileAjaxUploadLabel"></label>
+			</div>
+		</div>
+		
+	</body>	
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/bootstrap.min.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/bootstrap-modal-master/js/bootstrap-modalmanager.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/bootstrap-modal-master/js/bootstrap-modal.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script src="/CarStoreWeb/public/js/ajaxfileupload.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/jquery_extension/jquery_extension.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/common/common.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/system/init.js"></script>
+</html>

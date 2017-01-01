@@ -7,10 +7,17 @@
 	<resultMap type="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity"
 		id="serviceCarPriceHashEntity">
 		<result property="id" column="id" />
-		<result property="service_id" column="serviceId" />
-		<result property="car_type_id" column="carTypeId" />
+		<result property="serviceId" column="service_id" />
+		<result property="carTypeId" column="car_type_id" />
 		<result property="price" column="price" />
-		<result property="del_flag" column="delFlag" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+	
+	<resultMap type="com.econny.webapp.CarStoreParam.CarTypeServicePriceParam"
+		id="carTypeServicePriceParam">
+		<result property="carTypeName" column="car_type_name" />
+		<result property="serviceName" column="service_name" />
+		<result property="price" column="price" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity">
@@ -39,7 +46,7 @@
 		del_flag
 		) values
 		<foreach item="item" collection="list" separator=",">
-			(#{item.id}, #{item.service_id}, #{item.car_type_id}, #{item.price}, #{item.delFlag})
+			(#{item.id}, #{item.serviceId}, #{item.carTypeId}, #{item.price}, #{item.delFlag})
 		</foreach>
 	</insert>
 
@@ -73,6 +80,16 @@
 			<if test="carTypeId != null and carTypeId !=''">
 				AND car_type_id = #{carTypeId}
 			</if>
+	</select>
+
+	<select id="findServiceDetail" resultMap="carTypeServicePriceParam">
+		SELECT ct.name AS car_type_name, ser.name AS service_name, scp.price AS price FROM service_car_price scp
+		LEFT JOIN car_type ct
+		ON scp.car_type_id = ct.id
+		LEFT JOIN service ser
+		ON scp.service_id = ser.id
+		WHERE
+			scp.del_flag = 0
 	</select>
 
 </mapper>

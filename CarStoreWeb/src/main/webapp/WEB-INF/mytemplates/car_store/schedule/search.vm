@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>车店管理用户预约列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
+		<link href="/CarStoreWeb/public/car_store/css/all.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/css/animate.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    	<link href="/CarStoreWeb/public/car_store/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	</head>
+	<body class="bg-info page-background">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
+					</a>
+				</div>
+				<div id="logoutTitle" class="navbar-header pull-right ">
+					<span class="navbar-brand">
+						Logout
+					</span>
+				</div>
+				<div id="loginTitle" class="navbar-header pull-right">
+					<a href="/CarStoreWeb/user/login" class="navbar-brand">
+						Login
+					</a>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<ol class="breadcrumb">
+				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
+			</ol>
+		</div>
+		
+		<div class="container">
+			<h2>用户预约列表</h2>
+			<form id="userPreorderForm" class="form-horizontal" role="form">
+			  <div class="form-group">
+			    <label for="inputPassword3" class="col-sm-2 control-label">服务预约</label>
+			    <div class="col-sm-10">
+				  #foreach($schedule in $scheduleList)
+				      <option value='$!{schedule.id}'>$!{service.name}</option>
+				  <table title='$!{schedule.id}' class="table table-bordered text-center bg-danger">
+					  <tr>
+					  	<td>用户</td><td>$!{schedule.userName}</td>
+					  </tr>
+					  <tr>
+					  	<td>车类型</td><td>$!{schedule.carType}</td>
+					  </tr>
+					  <tr>
+					  	<td>服务</td><td>$!{schedule.serviceName}</td>
+					  </tr>
+					  <tr>
+					  	<td>价格</td><td>$!{schedule.price}</td>
+					  </tr>
+					  <tr>
+					  	<td>开始时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeStart})</td>
+					  </tr>
+					  <tr>
+					  	<td>结束时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeEnd})</td>
+					  </tr>
+				  </table>
+				  #end
+			    </div>
+			  </div>
+			</form>
+		</div>
+		
+	</body>	
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script src="/CarStoreWeb/public/js/ajaxfileupload.js"></script>
+	<script src="/CarStoreWeb/public/car_store/bootstrap-datepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script src="/CarStoreWeb/public/car_store/bootstrap-datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/CarStoreWeb/public/car_store/js/jquery_extension/jquery_extension.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/common/common.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/schedule/reserve.js"></script>
+</html>

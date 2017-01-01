@@ -1,6 +1,12 @@
 package com.econny.webapp.CarStoreEntity;
 
 import java.util.Date;
+
+import com.econny.webapp.common.CustomJsonDateDeserializer;
+import com.econny.webapp.common.CustomJsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 /*
  * author: peter.li
  * date: 2016-12-22
@@ -19,6 +25,9 @@ public class ScheduleEntity {
 
 	public ScheduleEntity() {
 		super();
+		price = 0.0;
+		timeStart = new Date();
+		timeEnd = new Date();
 		delFlag = false;
 	}
 
@@ -76,18 +85,22 @@ public class ScheduleEntity {
 		this.price = price;
 	}
 
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getTimeStart() {
 		return timeStart;
 	}
 
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setTimeStart(Date timeStart) {
 		this.timeStart = timeStart;
 	}
 
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getTimeEnd() {
 		return timeEnd;
 	}
 
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}

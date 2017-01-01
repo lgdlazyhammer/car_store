@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity;
+import com.econny.webapp.CarStoreParam.CarTypeServicePriceParam;
 /*
  * author: peter.li
  * date: 20160-12-22
@@ -22,4 +23,6 @@ public interface ServiceCarPriceMapper {
 	public void update(ServiceCarPriceEntity serviceCarPriceEntity);
 	
 	public List<ServiceCarPriceEntity> findList(ServiceCarPriceEntity serviceCarPriceEntity);
+	
+	public List<CarTypeServicePriceParam> findServiceDetail();
 }

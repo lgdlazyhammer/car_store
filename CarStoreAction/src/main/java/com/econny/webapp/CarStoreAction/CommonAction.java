@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -28,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.econny.webapp.CarStoreEntity.ApiResultEntity;
 import com.econny.webapp.CarStoreEntity.UploadFileEntity;
 import com.econny.webapp.CarStoreEnum.FileSecureLevel;
-import com.econny.webapp.OxygenService.impl.UploadFileServiceImpl;
+import com.econny.webapp.CarStoreService.impl.UploadFileServiceImpl;
 
 @Controller
 @RequestMapping("/commonService")

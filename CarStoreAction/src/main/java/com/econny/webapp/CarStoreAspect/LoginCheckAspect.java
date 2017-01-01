@@ -11,12 +11,12 @@ import org.springframework.util.StringUtils;
 
 
 //声明这是一个组件
-@Component
+//@Component
 //声明这是一个切面Bean
-@Aspect
+//@Aspect
 public class LoginCheckAspect {
 	
-	@Before(value = "execution(* com.econny.webapp.OxygenAction.EconnyTreeAction.getByNodeId())")
+	//@Before(value = "execution(* com.econny.webapp.OxygenAction.EconnyTreeAction.getByNodeId())")
     public void beforeMethod(JoinPoint point) throws ServletException {
         System.out.println("------test aop before");
         Object[] args = point.getArgs();

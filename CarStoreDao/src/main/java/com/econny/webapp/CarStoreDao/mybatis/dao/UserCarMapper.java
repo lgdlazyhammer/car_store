@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.econny.webapp.CarStoreEntity.UserCarEntity;
+import com.econny.webapp.CarStoreParam.UserCarParam;
 /*
  * author: peter.li
  * date: 20160-12-22
@@ -22,4 +23,6 @@ public interface UserCarMapper {
 	public void update(UserCarEntity userCarEntity);
 	
 	public List<UserCarEntity> findList(UserCarEntity userCarEntity);
+	
+	public List<UserCarParam> findCarDetailInfo(UserCarEntity userCarEntity);
 }

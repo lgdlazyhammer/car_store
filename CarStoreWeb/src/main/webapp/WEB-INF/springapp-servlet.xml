@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -13,15 +13,15 @@
                     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                     http://www.springframework.org/schema/tx 
                     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-  
+
 	<!-- 引入jdbc配置文件 <context:property-placeholder location="classpath:conf/config.properties" 
 		/> -->
-	<!-- <context:property-placeholder
-	location="/WEB-INF/applicationContext-redis.properties" /> -->
+	<!-- <context:property-placeholder location="/WEB-INF/applicationContext-redis.properties" 
+		/> -->
 	<context:property-placeholder location="/WEB-INF/conf/config.properties" />
 
-	<aop:aspectj-autoproxy /> 
-	
+	<aop:aspectj-autoproxy />
+
 	<!-- 对静态资源文件的访问 -->
 	<mvc:resources mapping="/public/**" location="/WEB-INF/public/" />
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
@@ -31,17 +31,17 @@
 	<context:component-scan base-package="com.econny.webapp.CarStoreAspect" />
 	<context:component-scan base-package="com.econny.webapp.CarStoreService" />
 	<context:component-scan base-package="com.econny.webapp.CarStoreAction" />
-	<context:component-scan base-package="com.econny.webapp.CarStoreTasks" />  
-	     
-	<aop:config proxy-target-class="true"/>  
-    <tx:annotation-driven transaction-manager="txManager" />  
-    <!-- 数据源的Bean事务管理器 -->  
-    <bean id="txManager"  
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
-        <property name="dataSource">  
-            <ref bean="dataSource" />  
-        </property>  
-    </bean>
+	<context:component-scan base-package="com.econny.webapp.CarStoreTasks" />
+
+	<aop:config proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="txManager" />
+	<!-- 数据源的Bean事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
 
 	<!-- <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"> 
 		<mvc:message-converters> <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
@@ -83,6 +83,8 @@
 		<property name="suffix">
 			<value>.vm</value>
 		</property>
+		<property name="dateToolAttribute" value="dateTool" />
+		<property name="numberToolAttribute" value="numberTool" />
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
 
@@ -134,40 +136,25 @@
 		</property>
 		<!-- 连接属性 -->
 		<property name="connectionProperties">
-			<value>clientEncoding=UTF-8</value>
+			<value>characterEncoding=UTF-8</value>
 		</property>
 	</bean>
 
 	<!-- mybatis文件配置，扫描所有mapper文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-		p:dataSource-ref="dataSource" p:typeAliasesPackage="com.econny.webapp.OxygenDao.mybatis.dao"
-		p:mapperLocations="classpath:com/econny/webapp/OxygenDao/mybatis/xml/**/*.xml" /><!-- 
+		p:dataSource-ref="dataSource" p:typeAliasesPackage="com.econny.webapp.CarStoreDao.mybatis.dao"
+		p:mapperLocations="classpath:com/econny/webapp/CarStoreDao/mybatis/xml/**/*.xml" /><!-- 
 		configLocation为mybatis属性 mapperLocations为所有mapper -->
 
 	<!-- 扫描basePackage下所有以@Repository标识的 接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.econny.webapp.OxygenDao.mybatis.dao" />
+		<property name="basePackage" value="com.econny.webapp.CarStoreDao.mybatis.dao" />
 	</bean>
 
 	<!-- 对数据源进行事务管理 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
-
-	<!-- For times when you just need to invoke a method on a specific object -->
-	<bean id="simpleJobDetail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="myBean" />
-		<property name="targetMethod" value="printMessage" />
-	</bean>
-
-	<!-- Run the job every 1 hour with initial delay of 1 second -->
-	<bean id="simpleTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail" ref="simpleJobDetail" />
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
 
 	<!-- For times when you just need to invoke a method on a specific object -->
 	<bean id="createFileUploadFolderTaskDetail"
@@ -189,14 +176,12 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="jobDetails">
 			<list>
-				<ref bean="simpleJobDetail" />
 				<ref bean="createFileUploadFolderTaskDetail" />
 			</list>
 		</property>
 
 		<property name="triggers">
 			<list>
-				<ref bean="simpleTrigger" />
 				<ref bean="createFileUploadFolderTaskTrigger" />
 			</list>
 		</property>

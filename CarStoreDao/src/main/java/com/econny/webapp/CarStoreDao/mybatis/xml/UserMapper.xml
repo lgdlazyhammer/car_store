@@ -9,8 +9,14 @@
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="password" column="password" />
-		<result property="role_id" column="roleId" />
-		<result property="del_flag" column="delFlag" />
+		<result property="roleId" column="role_id" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+	
+	<resultMap type="com.econny.webapp.CarStoreParam.UserParam"
+		id="userParam">
+		<result property="name" column="name" />
+		<result property="role" column="role" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.UserEntity">
@@ -72,6 +78,17 @@
 			</if>
 			<if test="password != null and password !=''">
 				AND password = #{password}
+			</if>
+	</select>
+
+	<select id="findUesrDetailInfo" parameterType="com.econny.webapp.CarStoreEntity.UserEntity" resultMap="userParam">
+		SELECT usr.name AS name, usro.name AS role FROM user usr
+		LEFT JOIN user_role usro
+		ON usr.role_id = usro.id
+		WHERE
+			usr.del_flag = 0
+			<if test="id != null and id !=''">
+				AND usr.id = #{id}
 			</if>
 	</select>
 

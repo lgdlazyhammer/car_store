@@ -7,10 +7,18 @@
 	<resultMap type="com.econny.webapp.CarStoreEntity.UserCarEntity"
 		id="userCarHashEntity">
 		<result property="id" column="id" />
-		<result property="user_id" column="userId" />
-		<result property="car_type_id" column="carTypeId" />
+		<result property="userId" column="user_id" />
+		<result property="carTypeId" column="car_type_id" />
 		<result property="description" column="description" />
-		<result property="del_flag" column="delFlag" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+	
+	<resultMap type="com.econny.webapp.CarStoreParam.UserCarParam"
+		id="userCarParam">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="carType" column="car_type" />
+		<result property="description" column="description" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.UserCarEntity">
@@ -69,6 +77,19 @@
 			</if>
 			<if test="userId != null and userId !=''">
 				AND user_id = #{userId}
+			</if>
+	</select>
+
+	<select id="findCarDetailInfo" parameterType="com.econny.webapp.CarStoreEntity.UserCarEntity" resultMap="userCarParam">
+		SELECT usrca.id AS id, usr.name AS user_name, cty.name AS car_type, usrca.description AS description FROM user_car usrca
+		LEFT JOIN user usr
+		ON usrca.user_id = usr.id
+		LEFT JOIN car_type cty
+		ON usrca.car_type_id = cty.id
+		WHERE
+			usrca.del_flag = 0
+			<if test="userId != null and userId !=''">
+				AND usrca.user_id = #{userId}
 			</if>
 	</select>
 

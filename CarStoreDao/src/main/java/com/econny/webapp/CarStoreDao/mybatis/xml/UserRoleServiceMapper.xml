@@ -7,10 +7,10 @@
 	<resultMap type="com.econny.webapp.CarStoreEntity.UserRoleServiceEntity"
 		id="userRoleServiceHashEntity">
 		<result property="id" column="id" />
-		<result property="user_role_id" column="userRoleId" />
-		<result property="service_id" column="serviceId" />
+		<result property="userRoleId" column="user_role_id" />
+		<result property="serviceId" column="service_id" />
 		<result property="description" column="description" />
-		<result property="del_flag" column="delFlag" />
+		<result property="delFlag" column="del_flag" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.UserRoleServiceEntity">

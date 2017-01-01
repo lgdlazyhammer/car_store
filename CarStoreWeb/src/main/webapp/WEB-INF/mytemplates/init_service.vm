@@ -13,7 +13,8 @@
   
     <br/>
     
-	<hr/><br/>
+	<hr/>
+		<br/>
 		<div id="prepareDownloadFile">prepare the download file.</div><br/>
 		to be downloaded file id:<input id="downloadFileId" type="text"/><br/>
 		<a id="downloadFile" href="#"></a>

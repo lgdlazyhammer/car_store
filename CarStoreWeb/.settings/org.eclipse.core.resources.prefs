@@ -1,8 +1,13 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/webapp/WEB-INF/mytemplates/car_store/index.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/mytemplates/car_store/schedule/management.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/mytemplates/car_store/schedule/search.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/mytemplates/car_store/user/register.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/mytemplates/econny/aboutus.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/mytemplates/econny/approach.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/mytemplates/econny/index.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/mytemplates/econny/programs.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/mytemplates/tree_node.vm=UTF-8
 encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

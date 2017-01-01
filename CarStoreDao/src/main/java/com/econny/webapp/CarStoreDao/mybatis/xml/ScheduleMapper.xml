@@ -7,14 +7,25 @@
 	<resultMap type="com.econny.webapp.CarStoreEntity.ScheduleEntity"
 		id="scheduleHashEntity">
 		<result property="id" column="id" />
-		<result property="user_id" column="userId" />
-		<result property="service_id" column="serviceId" />
-		<result property="car_id" column="carId" />
+		<result property="userId" column="user_id" />
+		<result property="serviceId" column="service_id" />
+		<result property="carId" column="car_id" />
 		<result property="price" column="price" />
-		<result property="time_start" column="timeStart" />
-		<result property="time_end" column="timeEnd" />
+		<result property="timeStart" column="time_start" />
+		<result property="timeEnd" column="time_end" />
 		<result property="description" column="description" />
-		<result property="del_flag" column="delFlag" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+	
+	<resultMap type="com.econny.webapp.CarStoreParam.ScheduleParam"
+		id="scheduleHashParam">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="serviceName" column="service_name" />
+		<result property="carType" column="car_type" />
+		<result property="price" column="price" />
+		<result property="timeStart" column="time_start" />
+		<result property="timeEnd" column="time_end" />
 	</resultMap>
 	
 	<insert id="save" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity">
@@ -79,6 +90,15 @@
 		WHERE		
 		id = #{id}
 	</update>
+	
+	<update id="updateScheduleTime" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity">
+		UPDATE schedule
+		set
+		time_start = #{timeStart},
+		time_end = #{timeEnd}
+		WHERE		
+		id = #{id}
+	</update>
 
 	<select id="findList" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" resultMap="scheduleHashEntity">
 		SELECT * FROM schedule
@@ -96,11 +116,89 @@
 			<if test="carId != null and carId !=''">
 				AND car_id = #{carId}
 			</if>
-			<if test="searchDate != null and searchDate !=''">
-				AND time_start &lt;= #{searchDate}
+			<if test="timeStart != null">
+				AND time_start &gt;= #{timeStart,jdbcType=TIMESTAMP}
 			</if>
-			<if test="searchDate != null and searchDate !=''">
-				AND time_end &gt;= #{searchDate}
+			<if test="timeEnd != null">
+				AND time_end &lt;= #{timeEnd,jdbcType=TIMESTAMP}
+			</if>
+	</select>
+
+	<select id="findSchedulePrice" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" resultType="Double">
+		SELECT scp.price AS price FROM user_car usc LEFT 
+		JOIN service_car_price scp ON (scp.car_type_id = usc.car_type_id) 
+		WHERE
+			scp.del_flag = 0
+			<if test="serviceId != null and serviceId !=''">
+				AND scp.service_id = #{serviceId}
+			</if>
+			<if test="carId != null and carId !=''">
+				AND usc.id = #{carId}
+			</if>
+	</select>
+	
+	<select id="findScheduleDetail" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" resultMap="scheduleHashParam">
+		SELECT 
+			sch.id AS id, 
+			usr.name AS user_name, 
+			cat.name AS car_type, 
+			ser.name AS service_name, 
+			sch.price AS price, 
+			sch.time_start AS time_start, 
+			sch.time_end AS time_end 
+		FROM schedule sch
+			LEFT JOIN user usr
+			ON sch.user_id = usr.id
+			LEFT JOIN user_car usc
+			ON sch.car_id = usc.id
+			LEFT JOIN service ser
+			ON sch.service_id = ser.id
+			LEFT JOIN car_type cat
+			ON usc.car_type_id = cat.id
+		WHERE
+		sch.del_flag = 0
+		<if test="id!= null and id !=''">
+			AND sch.id = #{id}
+		</if>
+		<if test="userId != null and userId !=''">
+			AND sch.user_id = #{userId}
+		</if>
+	</select>
+
+	<select id="findListForManagement" parameterType="com.econny.webapp.CarStoreParam.ScheduleSearchParam" resultMap="scheduleHashParam">
+		SELECT 
+			sch.id AS id, 
+			usr.name AS user_name,
+			cat.name AS car_type, 
+			ser.name AS service_name, 
+			sch.price AS price, 
+			sch.time_start AS time_start, 
+			sch.time_end AS time_end
+		FROM schedule sch
+			LEFT JOIN user usr
+			ON sch.user_id = usr.id
+			LEFT JOIN user_car usc
+			ON sch.car_id = usc.id
+			LEFT JOIN service ser
+			ON sch.service_id = ser.id
+			LEFT JOIN car_type cat
+			ON usc.car_type_id = cat.id
+		WHERE
+			sch.del_flag = 0
+			<if test="userName != null and userName !=''">
+				AND usr.name = #{userName}
+			</if>
+			<if test="carTypeId != null and carTypeId !=''">
+				AND usc.car_type_id = #{carTypeId}
+			</if>
+			<if test="serviceId != null and serviceId !=''">
+				AND sch.service_id = #{serviceId}
+			</if>
+			<if test="timeStart != null">
+				AND sch.time_start &gt;= #{timeStart,jdbcType=TIMESTAMP}
+			</if>
+			<if test="timeEnd != null">
+				AND sch.time_end &lt;= #{timeEnd,jdbcType=TIMESTAMP}
 			</if>
 	</select>
 
