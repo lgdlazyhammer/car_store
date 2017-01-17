@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.econny.webapp.CarStoreEntity.ServiceEntity;
+import com.econny.webapp.CarStoreEntity.UserEntity;
 /*
  * author: peter.li
  * date: 20160-12-22
@@ -22,4 +23,7 @@ public interface ServiceMapper {
 	public void update(ServiceEntity serviceEntity);
 	
 	public List<ServiceEntity> findList(ServiceEntity serviceEntity);
+	
+	/* find user role service list */
+	public List<ServiceEntity> findListForUser(UserEntity userEntity);
 }

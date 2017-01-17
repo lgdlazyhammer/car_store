@@ -1,5 +1,8 @@
 package com.econny.webapp.CarStoreEnum;
-
+/*
+ * author:peter.li
+ * date:2017-01-02
+ * purpose:enum to mark file secure level*/
 public enum FileSecureLevel {
 	LevelOne (0,"保密性文件"),
 	LevelTwo (1,"非保密文件"),

@@ -13,29 +13,24 @@
 	<body class="bg-info page-background">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/system/init">/系统配置</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
-		
-		<div class="container">
-			<ol class="breadcrumb">
-				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
-			</ol>
-		</div>
 				
 		<div class="container">
 			<h2>系统初始化</h2>

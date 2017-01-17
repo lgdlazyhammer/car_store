@@ -31,6 +31,7 @@
 	<context:component-scan base-package="com.econny.webapp.CarStoreAspect" />
 	<context:component-scan base-package="com.econny.webapp.CarStoreService" />
 	<context:component-scan base-package="com.econny.webapp.CarStoreAction" />
+	<context:component-scan base-package="com.econny.webapp.mobile.CarStoreAction" />
 	<context:component-scan base-package="com.econny.webapp.CarStoreTasks" />
 
 	<aop:config proxy-target-class="true" />

@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.econny.webapp.CarStoreEntity.ApiResultEntity;
 import com.econny.webapp.CarStoreEntity.ScheduleEntity;
+import com.econny.webapp.CarStoreEntity.UserEntity;
+import com.econny.webapp.CarStoreEnum.ServicePermissionEnum;
 import com.econny.webapp.CarStoreParam.ScheduleParam;
 import com.econny.webapp.CarStoreParam.ScheduleSearchParam;
+import com.econny.webapp.CarStoreService.impl.PermissionCheckServiceImpl;
 import com.econny.webapp.CarStoreService.impl.ScheduleServiceImpl;
 import com.econny.webapp.common.CommonMethod;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +40,9 @@ public class ScheduleAction {
 
 	@Autowired
 	ScheduleServiceImpl scheduleServiceImpl;
+
+	@Autowired
+	PermissionCheckServiceImpl permissionCheckService;
 
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -54,6 +60,14 @@ public class ScheduleAction {
 			try {
 				ScheduleEntity scheduleEntity = mapper.readValue(ajaxData, ScheduleEntity.class);
 
+				/* check user permission */
+				UserEntity userEntity = new UserEntity();
+				userEntity.setId(sessionId);
+				Boolean check = permissionCheckService.checkPermission(scheduleEntity.getServiceId(), userEntity);
+				if (!check) {
+					return new ApiResultEntity(false, "", 403, "");
+				}
+
 				Double price = scheduleServiceImpl.findSchedulePrice(scheduleEntity);
 
 				if (price.isNaN()) {
@@ -63,6 +77,42 @@ public class ScheduleAction {
 				scheduleEntity.setPrice(price);
 
 				scheduleServiceImpl.save(scheduleEntity);
+
+				return new ApiResultEntity(true, "", 200, "");
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new ApiResultEntity(false, e, 500, "");
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new ApiResultEntity(false, e, 500, "");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new ApiResultEntity(false, e, 500, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ApiResultEntity(false, e, 500, "");
+			}
+		}
+	}
+
+	/* 删除 */
+	@CrossOrigin(origins = "*", maxAge = 3600, methods = { RequestMethod.POST })
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Object delete(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(required = true) String ajaxData) {
+
+		String sessionId = request.getParameter("sessionId");
+		if (StringUtils.isEmpty(sessionId)) {
+			return new ApiResultEntity(false, "", 403, "");
+		} else {
+			try {
+				ScheduleEntity scheduleEntity = mapper.readValue(ajaxData, ScheduleEntity.class);
+
+				scheduleServiceImpl.delete(scheduleEntity);
 
 				return new ApiResultEntity(true, "", 200, "");
 			} catch (JsonParseException e) {
@@ -95,6 +145,7 @@ public class ScheduleAction {
 		if (StringUtils.isEmpty(sessionId)) {
 			return new ApiResultEntity(false, "", 403, "");
 		} else {
+
 			try {
 				ScheduleSearchParam scheduleSearchParam = mapper.readValue(ajaxData, ScheduleSearchParam.class);
 
@@ -137,6 +188,15 @@ public class ScheduleAction {
 		if (StringUtils.isEmpty(sessionId)) {
 			return new ApiResultEntity(false, "", 403, "");
 		} else {
+			/* check user permission */
+			UserEntity userEntity = new UserEntity();
+			userEntity.setId(sessionId);
+			Boolean check = permissionCheckService
+					.checkPermission(ServicePermissionEnum.ScheduleReserve.getPermission(), userEntity);
+			if (!check) {
+				return new ApiResultEntity(false, "", 403, "");
+			}
+
 			try {
 				ScheduleEntity scheduleEntity = mapper.readValue(ajaxData, ScheduleEntity.class);
 
@@ -175,8 +235,16 @@ public class ScheduleAction {
 			try {
 				ScheduleEntity scheduleEntity = mapper.readValue(ajaxData, ScheduleEntity.class);
 
+				if (scheduleEntity.getTimeStart() == null) {
+					scheduleEntity.setTimeStart(new Date());
+				}
+
+				if (scheduleEntity.getTimeEnd() == null) {
+					scheduleEntity.setTimeEnd(new Date());
+				}
+
 				List<ScheduleEntity> scheduleList = scheduleServiceImpl.findList(scheduleEntity);
-				
+
 				Integer[][] timeTable = { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 },
 						{ 0, 0, 0, 0, 0, 0 } };
 
@@ -191,9 +259,9 @@ public class ScheduleAction {
 						Integer[] timeLine = CommonMethod.makeTimeLine(startHour, endHour);
 						timeTable = CommonMethod.makeTimeTable(timeLine, timeTable);
 					}
-					
+
 					return new ApiResultEntity(true, timeTable, 200, "");
-				}else{
+				} else {
 					return new ApiResultEntity(true, null, 200, "");
 				}
 			} catch (JsonParseException e) {

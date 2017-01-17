@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import com.econny.webapp.CarStoreEntity.UserCarEntity;
 
 public class CommonMethod {
 	public static String getValid(String param) {
@@ -185,5 +188,16 @@ public class CommonMethod {
 		}
 		
 		return timeTable;
+	}
+	
+	public static UserCarEntity checkCarExist(String carId, List<UserCarEntity> list){
+		
+		for(UserCarEntity temp : list){
+			if(temp.getId().equals(carId)){
+				return temp;
+			}
+		}
+		
+		return null;
 	}
 }

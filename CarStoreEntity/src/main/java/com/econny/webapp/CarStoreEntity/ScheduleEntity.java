@@ -22,6 +22,8 @@ public class ScheduleEntity {
 	private Date timeEnd;
 	private String description;
 	private Boolean delFlag;
+	private Date createTime;
+	private Date updateTime;
 
 	public ScheduleEntity() {
 		super();
@@ -29,10 +31,12 @@ public class ScheduleEntity {
 		timeStart = new Date();
 		timeEnd = new Date();
 		delFlag = false;
+		createTime = new Date();
+		updateTime = new Date();
 	}
 
 	public ScheduleEntity(String id, String userId, String serviceId, String carId, Double price, Date timeStart,
-			Date timeEnd, String description, Boolean delFlag) {
+			Date timeEnd, String description, Boolean delFlag, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -43,6 +47,8 @@ public class ScheduleEntity {
 		this.timeEnd = timeEnd;
 		this.description = description;
 		this.delFlag = delFlag;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
 	}
 
 	public String getId() {
@@ -84,22 +90,22 @@ public class ScheduleEntity {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	
 	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getTimeStart() {
 		return timeStart;
 	}
-
+	
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setTimeStart(Date timeStart) {
 		this.timeStart = timeStart;
 	}
-
+	
 	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getTimeEnd() {
 		return timeEnd;
 	}
-
+	
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
@@ -119,6 +125,26 @@ public class ScheduleEntity {
 
 	public void setDelFlag(Boolean delFlag) {
 		this.delFlag = delFlag;
+	}
+	
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	public Date getCreateTime() {
+		return createTime;
+	}
+	
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }

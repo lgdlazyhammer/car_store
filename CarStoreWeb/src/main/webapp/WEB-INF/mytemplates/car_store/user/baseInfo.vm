@@ -11,81 +11,93 @@
 	<body class="bg-info page-background">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
 				</div>
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/CarStoreWeb/">
-						Main
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/user/baseInfo">/用户基础信息</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
-			</ol>
-		</div>
-		
-		<div class="container">
-			<h2>用户信息</h2>
-			<div class="table-responsive">
-				  <table class="table table-bordered text-center table-hover">
-				      <th>
-				          <td>用户名</td>
-				          <td>角色</td>
-				      </th>
-					  <tr>
-					  	<td></td>
-					    <td>$!{userBaseInfo.user.name}</td>
-					    <td>$!{userBaseInfo.user.role}</td>
-					  </tr>
-				  </table>
+			<input id="userPicIdFromInit" class="hidden" value="$!{userBaseInfo.user.picId}"/>
+			<fieldset class="formset-border">
+            <legend><h5>用户信息</h5></legend>
+				<div class="row">
+				  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><img id="userInfoPic" class="user-info-pic" src="" alt="image"/></div>
+				  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+				  </div>
 				</div>
-			</div>
-		</div>
-		
-		<div class="container">
-			<h2>用户车列表</h2>
-			<div class="table-responsive">
-				  <table class="table table-bordered text-center table-hover">
-				      <th>
-				          <td>用户</td>
-				          <td>车型</td>
-				          <td>描述信息</td>
-				      </th>
-					  #foreach($car in $userBaseInfo.carList)
-					  <tr>
-					  	<td></td>
-					    <td>$!{car.userName}</td>
-					    <td>$!{car.carType}</td>
-					    <td>$!{car.description}</td>
-					  </tr>
-					  #end
-				  </table>
+				<br/>
+				<div class="row">
+				  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">$!{userBaseInfo.user.name}</div>
+				  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+				  </div>
 				</div>
-			</div>
+				<div class="row">
+				  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">$!{userBaseInfo.user.role}</div>
+				  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+				  	<label for="changePersonImage" class="btn btn-default"><small>更换头像</small></label>
+				  	<input id="changePersonImage" name="myfile" type="file" class="hidden"/>
+				  </div>
+				</div>
+            </fieldset>
 		</div>
 		
+		<br/>
+		<div class="container">
+			<fieldset class="formset-border">
+            <legend><h5>用户车列表</h5></legend>
+				<div class="row">
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">用户</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">车型</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">描述信息</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">操作</div>
+				</div>
+				#foreach($car in $userBaseInfo.carList)
+				<div class="row">
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.userName}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.carType}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.description}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				  	<div class="btn-group" btn-group-vertical>
+					  	<button title="$!{car.id}" class="btn btn-default user-car-modify">修改</button>
+					  	<button title="$!{car.id}" class="btn btn-default user-car-delete">删除</button>
+				  	</div>
+				  </div>
+				</div>
+				#end
+				<div class="row">
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.userName}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.carType}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">$!{car.description}</div>
+				  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a class="btn btn-default a-clean" href="/CarStoreWeb/car/register">添加</a></div>
+				</div>
+            </fieldset>
+		</div>
+		
+		<form id="userCarModifyForm" class="hidden" action="/CarStoreWeb/user/car/modify">
+			<input type="text" name="carId"/>
+			<input type="text" name="sessionId"/>
+		</form>
 	</body>	
     <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/ajaxfileupload.js"></script>
     <script src="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
     <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-cookie-master/src/jquery.cookie.js"></script>
     <script src="/CarStoreWeb/public/js/ajaxfileupload.js"></script>
     <script src="/CarStoreWeb/public/car_store/js/jquery_extension/jquery_extension.js"></script>
     <script src="/CarStoreWeb/public/car_store/js/common/common.js"></script>
-    <script src="/CarStoreWeb/public/car_store/js/user/register.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/user/baseinfo.js"></script>
 </html>

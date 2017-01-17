@@ -13,74 +13,56 @@
 	<body class="bg-info page-background">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
 		
-		<!--<div class="container">
-			<div class="row text-center text-info bg-danger">
-				<div class="col-md-3">a</div>
-				<div class="col-md-3">b</div>
-				<div class="col-md-3">c</div>
-				<div class="col-md-3">d</div>
-			</div>
-		</div>-->
-		
 		<div class="container">
 			<div class="table-responsive">
 			  <table class="table table-bordered text-center bg-danger">
 				  <tr>
-				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/system/init"><div class="fill-parent">系统配置</div></a></td>
-				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/management"><div class="fill-parent">预约管理</div></a></td>
-				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/calendar"><div class="fill-parent">预约日历</div></a></td>
-				  </tr>
-				  <tr>
 				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/user/register"><div class="fill-parent">用户注册</div></a></td>
 				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/user/baseInfo"><div class="fill-parent">用户基础信息</div></a></td>
-				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/reserve"><div class="fill-parent">服务预约</div></a></td>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/serviceCarPrice/detail"><div class="fill-parent">服务列表</div></a></td>
 				  </tr>
 				  <tr>
-				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/serviceCarPrice/detail"><div class="fill-parent">服务列表</div></a></td>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/calendar"><div class="fill-parent">预约日历</div></a></td>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/reserve"><div class="fill-parent">服务预约</div></a></td>
 				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/search"><div class="fill-parent">预约查询</div></a></td>
 				  </tr>
 			  </table>
 			</div>
-		</div>
-		
-		
-		<div id="loginModel" class="modal fade">
-		  <div class="modal-header">
-		  </div>
-		  <div class="modal-body">
-		    <div class="row-fluid">
-		      <div class="span6">
-		        <h4>User Name</h4>
-		        <p><input id="userName" type="text"  class="form-control"></p>
-		      </div>
-		      <div class="span6">
-		        <h4>Password</h4>
-		        <p><input id="password" type="text"  class="form-control"></p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="modal-footer">
-		    <button type="button" data-dismiss="modal" class="btn">Close</button>
-		    <button id="loginButton" type="button" class="btn btn-primary">Login</button>
-		  </div>
+			#if ($user.roleId=="222" || $user.roleId=="333")
+			<div class="table-responsive">
+			  <table class="table table-bordered text-center bg-danger">
+				  <tr>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/schedule/management"><div class="fill-parent">预约管理</div></a></td>
+				  </tr>
+			  </table>
+			</div>
+			#end
+			#if ($user.roleId=="333")
+			<div class="table-responsive">
+			  <table class="table table-bordered text-center bg-danger">
+				  <tr>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/system/init"><div class="fill-parent">系统配置</div></a></td>
+				  	<td class="td-hover"><a class="a-clean" href="/CarStoreWeb/user/management"><div class="fill-parent">用户管理</div></a></td>
+				  </tr>
+			  </table>
+			</div>
+			#end
 		</div>
 	</body>	
     <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>

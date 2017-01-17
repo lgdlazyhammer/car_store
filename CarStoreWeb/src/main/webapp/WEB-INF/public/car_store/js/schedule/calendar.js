@@ -77,6 +77,8 @@ $(function()
 								$("#scheduleCalendarTable").html(calenderTableDisplay);
 							}else{
 								alert(data.result);
+								$("#scheduleCalendarTable").html("");
+								$("#scheduleCalendarTable").html("没有预约！");
 							}
 						}
 					},

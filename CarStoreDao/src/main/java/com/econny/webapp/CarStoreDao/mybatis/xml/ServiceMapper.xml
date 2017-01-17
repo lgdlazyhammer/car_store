@@ -64,4 +64,24 @@
 			</if>
 	</select>
 
+	<select id="findListForUser" parameterType="com.econny.webapp.CarStoreEntity.UserEntity" resultMap="serviceHashEntity">
+		SELECT 
+			ser.id AS id,
+			ser.name AS name,
+			ser.description AS description,
+			ser.del_flag AS del_flag
+		FROM service ser
+		LEFT JOIN user_role_service urser
+		ON ser.id = urser.service_id
+		LEFT JOIN user_role usro
+		ON urser.user_role_id = usro.id
+		LEFT JOIN user usr
+		ON usro.id = usr.role_id
+		WHERE
+			ser.del_flag = 0
+			<if test="id != null and id !=''">
+				AND usr.id = #{id}
+			</if>
+	</select>
+
 </mapper>

@@ -1,11 +1,10 @@
 .a-clean {
   text-decoration: none;
-  color: black; 
  }
 
 .a-clean:hover {
   text-decoration: none;
-  color: black; }
+}
 
 .full-page {
   width: 100%;
@@ -34,4 +33,13 @@
 
 .padding-one{
 	padding: 1em;
+}
+
+.user-info-pic{
+	width: 100%;
+	border-radius: 5%;
+}
+
+.hide-background{
+	background: none;
 }

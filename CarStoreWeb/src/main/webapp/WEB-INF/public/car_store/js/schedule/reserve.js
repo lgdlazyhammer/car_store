@@ -27,6 +27,7 @@ $(function()
 							if(data.success){
 								/*$.cookie('userId', data.result);
 								$(location).attr('href','/CarStoreWeb/car/register?userId=' + data.result);*/
+								$("#scheduleReserveSuccess").removeClass("hidden");
 							}else{
 								alert(data.result);
 							}

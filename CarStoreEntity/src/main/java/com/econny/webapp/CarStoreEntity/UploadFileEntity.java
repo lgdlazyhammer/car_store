@@ -1,4 +1,5 @@
 package com.econny.webapp.CarStoreEntity;
+
 /*
  * author: peter.li
  * date: 2016-12-22
@@ -15,15 +16,17 @@ public class UploadFileEntity {
 	private String fileContentType;// 文件类型
 	private byte[] fileContent; // 文件2进制内容
 	private Integer secureLevel;
-	
-	private String refUrl;//reference url
-	
-	public UploadFileEntity(){
+	private Boolean delFlag;
+
+	private String refUrl;// reference url
+
+	public UploadFileEntity() {
 		this.id = UUID.randomUUID().toString();
+		delFlag = false;
 	}
 
 	public UploadFileEntity(String id, String fileName, String fileType, Long fileSize, String fileContentType,
-			byte[] fileContent, Integer secureLevel) {
+			byte[] fileContent, Integer secureLevel, Boolean delFlag, String refUrl) {
 		super();
 		this.id = id;
 		this.fileName = fileName;
@@ -32,6 +35,8 @@ public class UploadFileEntity {
 		this.fileContentType = fileContentType;
 		this.fileContent = fileContent;
 		this.secureLevel = secureLevel;
+		this.delFlag = delFlag;
+		this.refUrl = refUrl;
 	}
 
 	public String getId() {
@@ -96,6 +101,14 @@ public class UploadFileEntity {
 
 	public void setRefUrl(String refUrl) {
 		this.refUrl = refUrl;
+	}
+
+	public Boolean getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(Boolean delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }

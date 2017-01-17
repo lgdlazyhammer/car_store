@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.econny.webapp.CarStoreDao.mybatis.dao.ServiceMapper;
 import com.econny.webapp.CarStoreEntity.ServiceEntity;
+import com.econny.webapp.CarStoreEntity.UserEntity;
 import com.econny.webapp.CarStoreService.inter.ServiceService;
 /*
  * author: peter.li
@@ -45,6 +46,10 @@ public class ServiceServiceImpl implements ServiceService {
 	public List<ServiceEntity> findList(ServiceEntity serviceEntity) {
 		// TODO Auto-generated method stub
 		return serviceMapper.findList(serviceEntity);
+	}
+	public List<ServiceEntity> findListForUser(UserEntity userEntity) {
+		// TODO Auto-generated method stub
+		return serviceMapper.findListForUser(userEntity);
 	}
 
 }

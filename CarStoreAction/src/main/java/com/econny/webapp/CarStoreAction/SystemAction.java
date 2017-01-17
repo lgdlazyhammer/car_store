@@ -1,6 +1,5 @@
 package com.econny.webapp.CarStoreAction;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -46,22 +45,22 @@ import com.econny.webapp.CarStoreService.impl.UserRoleServiceServiceImpl;
 @Controller
 @RequestMapping("/system")
 public class SystemAction {
-	
+
 	@Autowired
 	CarTypeServiceImpl carTypeServiceImpl;
-	
+
 	@Autowired
 	ServiceServiceImpl serviceServiceImpl;
-	
+
 	@Autowired
 	UserRoleServiceImpl userRoleServiceImpl;
-	
+
 	@Autowired
 	UserRoleServiceServiceImpl userRoleServiceServiceImpl;
-	
+
 	@Autowired
 	ServiceCarPriceServiceImpl serviceCarPriceServiceImpl;
-	
+
 	@Autowired
 	SystemServiceImpl systemServiceImpl;
 
@@ -69,7 +68,7 @@ public class SystemAction {
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public Object fileUploadSingle(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(required = true) MultipartFile myfile){
+			@RequestParam(required = true) MultipartFile myfile) {
 		// 获取文件暂存和保存路径
 		Properties prop = new Properties();
 		InputStream in = request.getSession().getServletContext()
@@ -82,7 +81,7 @@ public class SystemAction {
 			e.printStackTrace();
 			return new ApiResultEntity(false, e, 500, "io exception");
 		}
-		
+
 		// 如果只是上传一个文件，则只需要MultipartFile类型接收文件即可，而且无需显式指定@RequestParam注解
 		// 如果想上传多个文件，那么这里就要用MultipartFile[]类型来接收文件，并且还要指定@RequestParam注解
 		// 并且上传多个文件时，前台表单中的所有
@@ -90,10 +89,10 @@ public class SystemAction {
 		if (myfile.isEmpty()) {
 			return new ApiResultEntity(false, "", 400, "no file uploaded");
 		} else {
-			//clear the tables
+			// clear the tables
 			systemServiceImpl.truncTables();
-			
-			//analysis the file
+
+			// analysis the file
 			InputStream is;
 			try {
 				is = new ByteArrayInputStream(myfile.getBytes());
@@ -105,58 +104,60 @@ public class SystemAction {
 					}
 					if (hssfSheet.getSheetName().equals("car_type")) {
 						List<CarTypeEntity> carTypeList = getCarTypeSheet(hssfSheet);
-						
+
 						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("list",carTypeList);
-						
+						map.put("list", carTypeList);
+
 						carTypeServiceImpl.saveBatch(map);
 					}
 					if (hssfSheet.getSheetName().equals("service")) {
 						List<ServiceEntity> serviceList = getServiceSheet(hssfSheet);
-						
+
 						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("list",serviceList);
-						
+						map.put("list", serviceList);
+
 						serviceServiceImpl.saveBatch(map);
 					}
 					if (hssfSheet.getSheetName().equals("user_role")) {
 						List<UserRoleEntity> userRoleList = getUserRoleSheet(hssfSheet);
-						
+
 						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("list",userRoleList);
-						
+						map.put("list", userRoleList);
+
 						userRoleServiceImpl.saveBatch(map);
 					}
 					if (hssfSheet.getSheetName().equals("user_role_service")) {
 						List<UserRoleServiceEntity> userRoleServiceList = getUserRoleServiceSheet(hssfSheet);
-						
+
 						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("list",userRoleServiceList);
-						
+						map.put("list", userRoleServiceList);
+
 						userRoleServiceServiceImpl.saveBatch(map);
 					}
 					if (hssfSheet.getSheetName().equals("service_car_price")) {
 						List<ServiceCarPriceEntity> serviceCarPriceList = getServiceCarPriceSheet(hssfSheet);
-						
+
 						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("list",serviceCarPriceList);
-						
+						map.put("list", serviceCarPriceList);
+
 						serviceCarPriceServiceImpl.saveBatch(map);
 					}
 				}
-				
+
 				is.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return new ApiResultEntity(false, e, 500, "io exception");
-			} catch (Exception ee){
+			} catch (Exception ee) {
 				ee.printStackTrace();
 				return new ApiResultEntity(false, ee, 500, "data format error");
 			}
-			
-		};
 
+		}
+
+		/* insert user information */
+		systemServiceImpl.initUser();
 		return new ApiResultEntity(true, "", 200, "");
 	}
 
@@ -166,19 +167,19 @@ public class SystemAction {
 		multipart.transferTo(convFile);
 		return convFile;
 	}
-	
-	public List<CarTypeEntity> getCarTypeSheet(HSSFSheet hssfSheet){
-		
+
+	public List<CarTypeEntity> getCarTypeSheet(HSSFSheet hssfSheet) {
+
 		List<CarTypeEntity> list = new ArrayList<CarTypeEntity>();
 
-		//row stats at one but we record from two
+		// row stats at one but we record from two
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			
+
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			if (hssfRow == null) {
 				continue;
 			}
-			
+
 			CarTypeEntity carType = new CarTypeEntity();
 			// 循环列Cell
 			// 0--ID 1--NAME ID 2--DESCRIPTION 3--DELFLAG
@@ -206,25 +207,25 @@ public class SystemAction {
 				continue;
 			}
 			carType.setDelFlag(Boolean.valueOf(getValue(xhThree)));
-			
+
 			list.add(carType);
 		}
-		
+
 		return list;
 	}
-	
-	public List<ServiceEntity> getServiceSheet(HSSFSheet hssfSheet){
-		
+
+	public List<ServiceEntity> getServiceSheet(HSSFSheet hssfSheet) {
+
 		List<ServiceEntity> list = new ArrayList<ServiceEntity>();
 
-		//row stats at one but we record from two
+		// row stats at one but we record from two
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			
+
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			if (hssfRow == null) {
 				continue;
 			}
-			
+
 			ServiceEntity service = new ServiceEntity();
 			// 循环列Cell
 			// 0--ID 1--NAME ID 2--DESCRIPTION 3--DELFLAG
@@ -252,25 +253,25 @@ public class SystemAction {
 				continue;
 			}
 			service.setDelFlag(Boolean.valueOf(getValue(xhThree)));
-			
+
 			list.add(service);
 		}
-		
+
 		return list;
 	}
-	
-	public List<UserRoleEntity> getUserRoleSheet(HSSFSheet hssfSheet){
-		
+
+	public List<UserRoleEntity> getUserRoleSheet(HSSFSheet hssfSheet) {
+
 		List<UserRoleEntity> list = new ArrayList<UserRoleEntity>();
 
-		//row stats at one but we record from two
+		// row stats at one but we record from two
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			
+
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			if (hssfRow == null) {
 				continue;
 			}
-			
+
 			UserRoleEntity userRole = new UserRoleEntity();
 			// 循环列Cell
 			// 0--ID 1--NAME ID 2--DESCRIPTION 3--DELFLAG
@@ -298,25 +299,25 @@ public class SystemAction {
 				continue;
 			}
 			userRole.setDelFlag(Boolean.valueOf(getValue(xhThree)));
-			
+
 			list.add(userRole);
 		}
-		
+
 		return list;
 	}
-	
-	public List<UserRoleServiceEntity> getUserRoleServiceSheet(HSSFSheet hssfSheet){
-		
+
+	public List<UserRoleServiceEntity> getUserRoleServiceSheet(HSSFSheet hssfSheet) {
+
 		List<UserRoleServiceEntity> list = new ArrayList<UserRoleServiceEntity>();
 
-		//row stats at one but we record from two
+		// row stats at one but we record from two
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			
+
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			if (hssfRow == null) {
 				continue;
 			}
-			
+
 			UserRoleServiceEntity userRoleServiceEntity = new UserRoleServiceEntity();
 			// 循环列Cell
 			// 0--ID 1--USER_ROLE_ID 2--SERVICE_ID 3--DESCRIPTION 4--DELFLAG
@@ -349,25 +350,25 @@ public class SystemAction {
 				continue;
 			}
 			userRoleServiceEntity.setDelFlag(Boolean.valueOf(getValue(xhFour)));
-			
+
 			list.add(userRoleServiceEntity);
 		}
-		
+
 		return list;
 	}
-	
-	public List<ServiceCarPriceEntity> getServiceCarPriceSheet(HSSFSheet hssfSheet){
+
+	public List<ServiceCarPriceEntity> getServiceCarPriceSheet(HSSFSheet hssfSheet) {
 
 		List<ServiceCarPriceEntity> list = new ArrayList<ServiceCarPriceEntity>();
 
-		//row stats at one but we record from two
+		// row stats at one but we record from two
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			
+
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			if (hssfRow == null) {
 				continue;
 			}
-			
+
 			ServiceCarPriceEntity serviceCarPriceEntity = new ServiceCarPriceEntity();
 			// 循环列Cell
 			// 0--ID 1--SERVICE_ID 2--CAR_TYPE_ID 3--PRICE 4--DELFLAG
@@ -400,13 +401,13 @@ public class SystemAction {
 				continue;
 			}
 			serviceCarPriceEntity.setDelFlag(Boolean.valueOf(getValue(xhFour)));
-			
+
 			list.add(serviceCarPriceEntity);
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * 得到Excel表中的值
 	 * 
@@ -442,5 +443,5 @@ public class SystemAction {
 		}
 		return strCell;
 	}
-		
+
 }

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SystemMapper {
 
+	/* truncate all table for init */
 	public void truncTables();
 }

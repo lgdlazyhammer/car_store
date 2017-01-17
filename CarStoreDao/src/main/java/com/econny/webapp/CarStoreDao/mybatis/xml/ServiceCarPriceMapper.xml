@@ -82,7 +82,7 @@
 			</if>
 	</select>
 
-	<select id="findServiceDetail" resultMap="carTypeServicePriceParam">
+	<select id="findServiceDetail" parameterType="com.econny.webapp.CarStoreEntity.ServiceCarPriceEntity" resultMap="carTypeServicePriceParam">
 		SELECT ct.name AS car_type_name, ser.name AS service_name, scp.price AS price FROM service_car_price scp
 		LEFT JOIN car_type ct
 		ON scp.car_type_id = ct.id
@@ -90,6 +90,12 @@
 		ON scp.service_id = ser.id
 		WHERE
 			scp.del_flag = 0
+			<if test="serviceId != null and serviceId !=''">
+				AND scp.service_id = #{serviceId}
+			</if>
+			<if test="carTypeId != null and carTypeId !=''">
+				AND scp.car_type_id = #{carTypeId}
+			</if>
 	</select>
 
 </mapper>

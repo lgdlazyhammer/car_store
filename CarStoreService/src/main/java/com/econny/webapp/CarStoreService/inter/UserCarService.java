@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.econny.webapp.CarStoreEntity.UserCarEntity;
 import com.econny.webapp.CarStoreParam.UserCarParam;
+
 /*
  * author: peter.li
  * date: 20160-12-22
@@ -12,14 +13,18 @@ import com.econny.webapp.CarStoreParam.UserCarParam;
 public interface UserCarService {
 
 	public void save(UserCarEntity userCarEntity);
-	
-	public void saveBatch(HashMap<String,Object> map);
-	
+
+	public void saveBatch(HashMap<String, Object> map);
+
 	public void delete(UserCarEntity userCarEntity);
-	
+
 	public void update(UserCarEntity userCarEntity);
-	
+
+	/* update user car information */
+	public void updateCarInfo(UserCarEntity userCarEntity);
+
 	public List<UserCarEntity> findList(UserCarEntity userCarEntity);
-	
+
+	/* find user car information to display */
 	public List<UserCarParam> findCarDetailInfo(UserCarEntity userCarEntity);
 }

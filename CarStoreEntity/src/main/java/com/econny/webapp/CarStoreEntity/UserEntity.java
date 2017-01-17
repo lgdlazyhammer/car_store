@@ -9,6 +9,7 @@ public class UserEntity {
 	private String name;
 	private String password;
 	private String roleId;
+	private String picId;
 	private Boolean delFlag;
 
 	public UserEntity() {
@@ -16,12 +17,13 @@ public class UserEntity {
 		this.delFlag = false;
 	}
 
-	public UserEntity(String id, String name, String password, String roleId, Boolean delFlag) {
+	public UserEntity(String id, String name, String password, String roleId, String picId, Boolean delFlag) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.roleId = roleId;
+		this.picId = picId;
 		this.delFlag = delFlag;
 	}
 
@@ -55,6 +57,14 @@ public class UserEntity {
 
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
+	}
+
+	public String getPicId() {
+		return picId;
+	}
+
+	public void setPicId(String picId) {
+		this.picId = picId;
 	}
 
 	public Boolean getDelFlag() {

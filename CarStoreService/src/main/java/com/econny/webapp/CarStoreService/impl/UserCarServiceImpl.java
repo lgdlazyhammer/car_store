@@ -11,42 +11,53 @@ import com.econny.webapp.CarStoreDao.mybatis.dao.UserCarMapper;
 import com.econny.webapp.CarStoreEntity.UserCarEntity;
 import com.econny.webapp.CarStoreParam.UserCarParam;
 import com.econny.webapp.CarStoreService.inter.UserCarService;
+
 /*
  * author: peter.li
  * date: 20160-12-22
  * purpose: service implement layer*/
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class UserCarServiceImpl implements UserCarService {
 
 	@Autowired
 	UserCarMapper userCarMapper;
-	
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public void save(UserCarEntity userCarEntity) {
 		// TODO Auto-generated method stub
 		userCarMapper.save(userCarEntity);
 	}
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public void saveBatch(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		userCarMapper.saveBatch(map);
 	}
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public void delete(UserCarEntity userCarEntity) {
 		// TODO Auto-generated method stub
 		userCarMapper.delete(userCarEntity);
 	}
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public void update(UserCarEntity userCarEntity) {
 		// TODO Auto-generated method stub
 		userCarMapper.update(userCarEntity);
+	}
+
+	@Transactional(readOnly = false)
+	public void updateCarInfo(UserCarEntity userCarEntity) {
+		// TODO Auto-generated method stub
+		userCarMapper.updateCarInfo(userCarEntity);
 	}
 
 	public List<UserCarEntity> findList(UserCarEntity userCarEntity) {
 		// TODO Auto-generated method stub
 		return userCarMapper.findList(userCarEntity);
 	}
+
 	public List<UserCarParam> findCarDetailInfo(UserCarEntity userCarEntity) {
 		// TODO Auto-generated method stub
 		return userCarMapper.findCarDetailInfo(userCarEntity);

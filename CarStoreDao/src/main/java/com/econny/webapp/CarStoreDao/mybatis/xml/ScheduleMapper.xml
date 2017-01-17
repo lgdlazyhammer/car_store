@@ -15,6 +15,8 @@
 		<result property="timeEnd" column="time_end" />
 		<result property="description" column="description" />
 		<result property="delFlag" column="del_flag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
 	</resultMap>
 	
 	<resultMap type="com.econny.webapp.CarStoreParam.ScheduleParam"
@@ -38,7 +40,9 @@
 		time_start,
 		time_end,
 		description,
-		del_flag
+		del_flag,
+		create_time,
+		update_time
 		) values(
 		#{id},
 		#{userId},
@@ -48,7 +52,9 @@
 		#{timeStart},
 		#{timeEnd},
 		#{description},
-		#{delFlag}
+		#{delFlag},
+		#{createTime},
+		#{updateTime}
 		)
 	</insert>
 	
@@ -63,10 +69,12 @@
 		time_start,
 		time_end,
 		description,
-		del_flag
+		del_flag,
+		create_time,
+		update_time
 		) values
 		<foreach item="item" collection="list" separator=",">
-			(#{item.id},#{item.userId},#{item.serviceId},#{item.carId},#{item.price},#{item.timeStart},#{item.timeEnd},#{item.description},#{item.delFlag})
+			(#{item.id},#{item.userId},#{item.serviceId},#{item.carId},#{item.price},#{item.timeStart},#{item.timeEnd},#{item.description},#{item.delFlag},#{item.createTime},#{item.updateTime})
 		</foreach>
 	</insert>
 
@@ -86,7 +94,9 @@
 		price = #{price},
 		time_start = #{timeStart},
 		time_end = #{timeEnd},
-		description = #{description}
+		description = #{description},
+		create_time = #{createTime},
+		update_time = #{updateTime}
 		WHERE		
 		id = #{id}
 	</update>
@@ -95,7 +105,8 @@
 		UPDATE schedule
 		set
 		time_start = #{timeStart},
-		time_end = #{timeEnd}
+		time_end = #{timeEnd},
+		update_time = #{updateTime}
 		WHERE		
 		id = #{id}
 	</update>
@@ -122,6 +133,7 @@
 			<if test="timeEnd != null">
 				AND time_end &lt;= #{timeEnd,jdbcType=TIMESTAMP}
 			</if>
+			ORDER BY create_time
 	</select>
 
 	<select id="findSchedulePrice" parameterType="com.econny.webapp.CarStoreEntity.ScheduleEntity" resultType="Double">
@@ -163,6 +175,7 @@
 		<if test="userId != null and userId !=''">
 			AND sch.user_id = #{userId}
 		</if>
+		ORDER BY sch.create_time
 	</select>
 
 	<select id="findListForManagement" parameterType="com.econny.webapp.CarStoreParam.ScheduleSearchParam" resultMap="scheduleHashParam">
@@ -200,6 +213,7 @@
 			<if test="timeEnd != null">
 				AND sch.time_end &lt;= #{timeEnd,jdbcType=TIMESTAMP}
 			</if>
+			ORDER BY sch.create_time
 	</select>
 
 </mapper>

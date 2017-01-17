@@ -16,32 +16,26 @@
 		</form>
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/schedule/management">/预约管理</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
-			</ol>
-		</div>
-		
-		<div class="container">
-			<h2>服务预约查询</h2>
 			<form id="scheduleManagementForm" class="form-horizontal" role="form">
 			  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
@@ -76,7 +70,7 @@
 			  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">开始时间</label>
 			    <div class="col-sm-10">
-					<div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+					<div class="input-group date form_datetime col-md-5" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
 					        <input id="scheduleStartTime" class="form-control" size="16" type="text" value="" readonly>
 					        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -86,7 +80,7 @@
 			  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">结束时间</label>
 			    <div class="col-sm-10">
-					<div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+					<div class="input-group date form_datetime col-md-5" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
 					        <input id="scheduleEndTime" class="form-control" size="16" type="text" value="" readonly>
 					        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -105,10 +99,7 @@
 		<div class="container">
 
 			<div id="displayUsers" class="hidden">
-                <br/>
                 <fieldset class="schedule-management-item">
-                	<legend>预约信息</legend>
-                	<span class="hidden id"></span>
                 	<div>
 						<span>用户名： </span><span class="userName"></span><br/>
 						<span>服务名： </span><span class="serviceName"></span><br/>
@@ -118,6 +109,7 @@
 						<span>结束时间： </span><span class="timeEnd"></span><br/>
                 	</div>
                 </fieldset>
+                <br/>
 			</div>
 		</div>
 	</body>	

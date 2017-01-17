@@ -23,6 +23,7 @@
 		<result property="fileContentType" column="file_content_type" />
 		<result property="fileContent" column="file_content" />
 		<result property="secureLevel" column="secure_level" />
+		<result property="delFlag" column="del_flag" />
 	</resultMap>
 
 	<insert id="insert" parameterType="com.econny.webapp.CarStoreEntity.UploadFileEntity">
@@ -33,7 +34,8 @@
 		file_size,
 		file_content_type,
 		file_content,
-		secure_level
+		secure_level,
+		del_flag
 		) values(
 		#{id},
 		#{fileName},
@@ -41,7 +43,8 @@
 		#{fileSize},
 		#{fileContentType},
 		#{fileContent},
-		#{secureLevel}
+		#{secureLevel},
+		#{delFlag}
 		)
 	</insert>
 	
@@ -50,8 +53,9 @@
 		<include refid="uploadFileColumns"/>
 		FROM file_upload fil_up
 		WHERE
+			fil_up.del_flag = 0
 		<if test="id !=null and id !=''">
-			fil_up.id = #{id}
+			AND fil_up.id = #{id}
 		</if>
 	</select>
 

@@ -11,33 +11,26 @@
 	<body class="bg-info page-background">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/car/register">/车辆登记</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
-				<li><a class="a-clean" href="/CarStoreWeb/user/register">用户注册</a></li>
-			</ol>
-		</div>
-		
-		<div class="container">
-			<h2>车辆登记</h2>
 			<form id="carRegisterForm" class="form-horizontal" role="form">
 			  <div class="form-group">
 			    <label for="inputCarType" class="col-sm-2 control-label">车辆类型</label>
@@ -66,17 +59,15 @@
 		</div>
 		
 		<div class="container">
-			<h2>用户车列表</h2>
 			<div class="table-responsive">
 				  <table class="table table-bordered text-center table-hover">
-				      <th>
+				      <tr>
 				          <td>用户</td>
 				          <td>车型</td>
 				          <td>描述信息</td>
-				      </th>
+				      </tr>
 					  #foreach($car in $carRegisterDisplayParam.userCarList)
 					  <tr>
-					  	<td></td>
 					    <td>$!{car.userName}</td>
 					    <td>$!{car.carType}</td>
 					    <td>$!{car.description}</td>

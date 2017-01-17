@@ -12,62 +12,55 @@
 	<body class="bg-info page-background">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img class="herder-icon" alt="Brand" src="/CarStoreWeb/public/reference_node_oauth/img/icon-header.png">
-					</a>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/schedule/search">/预约查询</a>
 				</div>
 				<div id="logoutTitle" class="navbar-header pull-right ">
 					<span class="navbar-brand">
-						Logout
+						退出
 					</span>
 				</div>
 				<div id="loginTitle" class="navbar-header pull-right">
 					<a href="/CarStoreWeb/user/login" class="navbar-brand">
-						Login
+						登录
 					</a>
 				</div>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a class="a-clean" href="/CarStoreWeb">主页</a></li>
-			</ol>
-		</div>
-		
-		<div class="container">
-			<h2>用户预约列表</h2>
-			<form id="userPreorderForm" class="form-horizontal" role="form">
-			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">服务预约</label>
-			    <div class="col-sm-10">
-				  #foreach($schedule in $scheduleList)
-				      <option value='$!{schedule.id}'>$!{service.name}</option>
-				  <table title='$!{schedule.id}' class="table table-bordered text-center bg-danger">
-					  <tr>
-					  	<td>用户</td><td>$!{schedule.userName}</td>
-					  </tr>
-					  <tr>
-					  	<td>车类型</td><td>$!{schedule.carType}</td>
-					  </tr>
-					  <tr>
-					  	<td>服务</td><td>$!{schedule.serviceName}</td>
-					  </tr>
-					  <tr>
-					  	<td>价格</td><td>$!{schedule.price}</td>
-					  </tr>
-					  <tr>
-					  	<td>开始时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeStart})</td>
-					  </tr>
-					  <tr>
-					  	<td>结束时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeEnd})</td>
-					  </tr>
-				  </table>
-				  #end
+		  <div class="form-group">
+			  #foreach($schedule in $scheduleList)
+			    <div>
+					  <table class="table table-bordered text-center bg-default">
+						  <tr>
+						  	<td>用户</td><td>$!{schedule.userName}</td>
+						  </tr>
+						  <tr>
+						  	<td>车类型</td><td>$!{schedule.carType}</td>
+						  </tr>
+						  <tr>
+						  	<td>服务</td><td>$!{schedule.serviceName}</td>
+						  </tr>
+						  <tr>
+						  	<td>价格</td><td>$!{schedule.price}</td>
+						  </tr>
+						  <tr>
+						  	<td>开始时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeStart})</td>
+						  </tr>
+						  <tr>
+						  	<td>结束时间</td><td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$!{schedule.timeEnd})</td>
+						  </tr>
+						  <tr>
+						  	<td></td><td><div title='$!{schedule.id}' class="schedule-search-item pull-right btn btn-default">删除</div></td>
+						  </tr>
+					  </table>
 			    </div>
-			  </div>
-			</form>
+			  #end
+		  </div>
 		</div>
 		
 	</body>	
@@ -79,5 +72,5 @@
 	<script src="/CarStoreWeb/public/car_store/bootstrap-datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script src="/CarStoreWeb/public/car_store/js/jquery_extension/jquery_extension.js"></script>
     <script src="/CarStoreWeb/public/car_store/js/common/common.js"></script>
-    <script src="/CarStoreWeb/public/car_store/js/schedule/reserve.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/schedule/search.js"></script>
 </html>

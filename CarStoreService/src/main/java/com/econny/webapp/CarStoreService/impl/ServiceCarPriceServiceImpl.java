@@ -48,9 +48,9 @@ public class ServiceCarPriceServiceImpl implements ServiceCarPriceService {
 		return serviceCarPriceMapper.findList(serviceCarPriceEntity);
 	}
 	
-	public List<CarTypeServicePriceParam> findServiceDetail() {
+	public List<CarTypeServicePriceParam> findServiceDetail(ServiceCarPriceEntity serviceCarPriceEntity) {
 		// TODO Auto-generated method stub
-		return serviceCarPriceMapper.findServiceDetail();
+		return serviceCarPriceMapper.findServiceDetail(serviceCarPriceEntity);
 	}
 
 }

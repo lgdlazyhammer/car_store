@@ -24,5 +24,6 @@ public interface ServiceCarPriceMapper {
 	
 	public List<ServiceCarPriceEntity> findList(ServiceCarPriceEntity serviceCarPriceEntity);
 	
-	public List<CarTypeServicePriceParam> findServiceDetail();
+	/*find car type and service price to display*/
+	public List<CarTypeServicePriceParam> findServiceDetail(ServiceCarPriceEntity serviceCarPriceEntity);
 }

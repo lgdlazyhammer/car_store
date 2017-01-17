@@ -67,6 +67,15 @@
 		WHERE		
 		id = #{id}
 	</update>
+	
+	<update id="updateCarInfo" parameterType="com.econny.webapp.CarStoreEntity.UserCarEntity">
+		UPDATE user_car
+		set
+		car_type_id = #{carTypeId},
+		description = #{description}
+		WHERE		
+		id = #{id}
+	</update>
 
 	<select id="findList" parameterType="com.econny.webapp.CarStoreEntity.UserCarEntity" resultMap="userCarHashEntity">
 		SELECT * FROM user_car

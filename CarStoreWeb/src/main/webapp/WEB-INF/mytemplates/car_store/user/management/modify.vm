@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>车店管理用户管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
+		<link href="/CarStoreWeb/public/car_store/css/all.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/reference_node_oauth/css/animate.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	</head>
+	<body class="bg-info page-background">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb">主页</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand a-clean" href="/CarStoreWeb/user/management">/用户信息管理</a>
+				</div>
+				<div class="navbar-header pull-left">
+					<a class="navbar-brand" href="#">/用户信息修改</a>
+				</div>
+				<div id="logoutTitle" class="navbar-header pull-right ">
+					<span class="navbar-brand">
+						退出
+					</span>
+				</div>
+				<div id="loginTitle" class="navbar-header pull-right">
+					<a href="/CarStoreWeb/user/login" class="navbar-brand">
+						登录
+					</a>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<div class="form-group">
+				<label class="control-label">用户信息</label>
+				<div class="row">
+				  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">$!{userModifyParam.user.name}</div>
+				  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">$!{userModifyParam.user.role}</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<form id="userManagementModifyForm" class="form-horizontal" role="form">
+			  <input id="userManagemenetModifyUserId" name="userId" value="$!{userModifyParam.user.id}" class="hidden"/>
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">用户类型</label>
+			    <div class="col-sm-10">
+			      <select id="managementUserType" class="form-control">
+					  <option></option>
+					  #foreach($userType in $userModifyParam.userRoleList)
+					      <option value='$!{userType.id}'>$!{userType.name}</option>
+					  #end
+				  </select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">修改</button>
+			      <button type="reset" class="btn btn-default">取消</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+		
+		<div id="userRoleModifyResult" class="container hidden">角色更新成功!</div>
+		
+	</body>	
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-3.0.0.min.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/ajaxfileupload.js"></script>
+    <script src="/CarStoreWeb/public/car_store/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
+    <script src="/CarStoreWeb/public/reference_node_oauth/js/jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script src="/CarStoreWeb/public/js/ajaxfileupload.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/jquery_extension/jquery_extension.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/common/common.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/transparency.min.js"></script>
+    <script src="/CarStoreWeb/public/car_store/js/user/management/modify.js"></script>
+</html>

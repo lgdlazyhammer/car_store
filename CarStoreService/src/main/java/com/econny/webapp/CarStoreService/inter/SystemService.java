@@ -9,11 +9,16 @@ import com.econny.webapp.CarStoreEntity.CarTypeEntity;
  * date: 20160-12-22
  * purpose: service layer interface*/
 import com.econny.webapp.CarStoreEntity.UserEntity;
+
 /*
  * author: peter.li
  * date: 20160-12-22
  * purpose: service layer*/
 public interface SystemService {
 
+	/* truncate all table for init */
 	public void truncTables();
+
+	/* insert init user information */
+	public void initUser();
 }
